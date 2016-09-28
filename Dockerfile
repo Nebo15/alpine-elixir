@@ -5,7 +5,7 @@ MAINTAINER Nebo#15 support@nebo15.com
 ENV REFRESHED_AT=2016-09-28 \
     ELIXIR_VERSION=1.3.2-r0
 
-# Install Elixir, Git, make, g++
+# Install Elixir and git
 RUN \
     echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk --no-cache --update add elixir@edge=$ELIXIR_VERSION git && \
