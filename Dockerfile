@@ -10,4 +10,5 @@ RUN \
     echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk --no-cache --update add elixir@edge=$ELIXIR_VERSION git make g++ && \
     mix local.hex --force && \
-    mix local.rebar --force
+    mix local.rebar --force && \
+    rm -rf /var/cache/apk/*
