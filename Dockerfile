@@ -3,7 +3,7 @@ MAINTAINER Nebo#15 support@nebo15.com
 
 # Configure environment variables and other settings
 ENV REFRESHED_AT=2016-09-28 \
-    ELIXIR_VERSION=1.3.4-r0
+    ELIXIR_VERSION=1.4.1-r0
 
 # Install Elixir and git
 RUN \
