@@ -1,9 +1,9 @@
-FROM nebo15/alpine-erlang:19.1.0-r0
+FROM nebo15/alpine-erlang:19.1.0-r0-3.5
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Configure environment variables and other settings
-ENV REFRESHED_AT=2016-09-28 \
-    ELIXIR_VERSION=1.4.1-r0
+ENV REFRESHED_AT=2017-04-11 \
+    ELIXIR_VERSION=1.4.2-r0
 
 # Install Elixir and git
 RUN \
