@@ -1,30 +1,28 @@
-FROM nebo15/alpine-erlang:19.3.1
+FROM erlang
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Configure environment variables and other settings
-ENV REFRESHED_AT=2017-04-18 \
-    ELIXIR_VERSION=1.4.2
+ENV REFRESHED_AT=2017-06-10 \
+    LANG=en_US.UTF-8 \
+    HOME=/opt/app/ \
+    # Set this so that CTRL+G works properly
+    TERM=xterm \
+    ELIXIR_VERSION=1.4.4
 
 WORKDIR /tmp/elixir-build
 
-# Install Elixir and git
-RUN set -xe && \
-    ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/archive/v${ELIXIR_VERSION}.tar.gz" && \
-    ELIXIR_DOWNLOAD_SHA256="cb4e2ec4d68b3c8b800179b7ae5779e2999aa3375f74bd188d7d6703497f553f" && \
-    # Install git
-    apk --no-cache --update add git && \
+# Install Elixir
+RUN set -xe; \
+    ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/releases/download/v${ELIXIR_VERSION}/Precompiled.zip" && \
     # Install Elixir build deps
     apk add --no-cache --update --virtual .elixir-build \
-      make \
-      curl && \
+      unzip \
+      curl \
+      ca-certificates && \
     # Download and validate Elixir checksum
-    curl -fSL -o elixir-src.tar.gz "${ELIXIR_DOWNLOAD_URL}" && \
-    # echo "${ELIXIR_DOWNLOAD_SHA256} elixir-src.tar.gz" | sha256sum -c - && \
-    tar -xzf elixir-src.tar.gz -C /tmp/elixir-build --strip-components=1 && \
-    rm elixir-src.tar.gz && \
-    # Build Elixir
-    make && \
-    make install && \
+    curl -fSL -o elixir-precompiled.zip "${ELIXIR_DOWNLOAD_URL}" && \
+    unzip -d /usr/local elixir-precompiled.zip && \
+    rm elixir-precompiled.zip && \
     # Install Hex and Rebar
     mix local.hex --force && \
     mix local.rebar --force && \
@@ -32,3 +30,7 @@ RUN set -xe && \
     rm -rf /tmp/elixir-build && \
     # Delete Elixir build deps
     apk del .elixir-build
+
+WORKDIR ${HOME}
+
+CMD ["iex"]
