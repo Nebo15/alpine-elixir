@@ -1,4 +1,4 @@
-FROM erlang
+FROM nebo15/alpine-erlang:19.3.4
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Configure environment variables and other settings
