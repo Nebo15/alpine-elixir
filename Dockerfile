@@ -1,4 +1,4 @@
-FROM nebo15/alpine-erlang:19.3.4
+FROM nebo15/alpine-erlang:20.0
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Configure environment variables and other settings
@@ -7,7 +7,7 @@ ENV REFRESHED_AT=2017-06-10 \
     HOME=/opt/app/ \
     # Set this so that CTRL+G works properly
     TERM=xterm \
-    ELIXIR_VERSION=1.4.4
+    ELIXIR_VERSION=1.4.5
 
 WORKDIR /tmp/elixir-build
 
