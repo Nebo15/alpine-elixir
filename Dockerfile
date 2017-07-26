@@ -1,13 +1,19 @@
-FROM nebo15/alpine-erlang:20.0
+FROM nebo15/alpine-erlang:20.0.1
 MAINTAINER Nebo#15 support@nebo15.com
 
-# Configure environment variables and other settings
-ENV REFRESHED_AT=2017-06-10 \
-    LANG=en_US.UTF-8 \
-    HOME=/opt/app/ \
+# Important! Update this no-op ENV variable when this Dockerfile
+# is updated with the current date. It will force refresh of all
+# of the base images and things like `apt-get update` won't be using
+# old cached versions when the Dockerfile is built.
+ENV REFRESHED_AT=2017-07-26
+
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8 \
     # Set this so that CTRL+G works properly
     TERM=xterm \
-    ELIXIR_VERSION=1.4.5
+    HOME=/opt/app/ \
+    ELIXIR_VERSION=1.5.0
 
 WORKDIR /tmp/elixir-build
 
