@@ -1,11 +1,11 @@
-FROM nebo15/alpine-erlang:20.2.2
+FROM nebo15/alpine-erlang:20.3.7
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Important! Update this no-op ENV variable when this Dockerfile
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2018-01-13
+ENV REFRESHED_AT=2018-06-12
 
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
@@ -13,7 +13,7 @@ ENV LANG=en_US.UTF-8 \
     # Set this so that CTRL+G works properly
     TERM=xterm \
     HOME=/opt/app/ \
-    ELIXIR_VERSION=1.6.4
+    ELIXIR_VERSION=1.6.5
 
 WORKDIR /tmp/elixir-build
 
@@ -36,6 +36,9 @@ RUN set -xe; \
     rm -rf /tmp/elixir-build && \
     # Delete Elixir build deps
     apk del .elixir-build
+
+# Install git (common for dependencies fetching) and make (common for dependencies building)
+RUN apk add --no-cache --update git make
 
 WORKDIR ${HOME}
 
