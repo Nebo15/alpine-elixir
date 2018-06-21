@@ -1,4 +1,4 @@
-FROM nebo15/alpine-erlang:20.3.7
+FROM nebo15/alpine-erlang:21.0
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Important! Update this no-op ENV variable when this Dockerfile
@@ -13,7 +13,8 @@ ENV LANG=en_US.UTF-8 \
     # Set this so that CTRL+G works properly
     TERM=xterm \
     HOME=/opt/app/ \
-    ELIXIR_VERSION=1.6.5
+    ELIXIR_VERSION=1.6.6 \
+    ELIXIR_DOWNLOAD_SHA256=d6a84726a042407110d3b13b1ce8d9524b4a50df68174e79d89a9e42e30b410b
 
 WORKDIR /tmp/elixir-build
 
@@ -27,6 +28,7 @@ RUN set -xe; \
       ca-certificates && \
     # Download and validate Elixir checksum
     curl -fSL -o elixir-precompiled.zip "${ELIXIR_DOWNLOAD_URL}" && \
+    echo "$ELIXIR_DOWNLOAD_SHA256  elixir-precompiled.zip" | sha256sum -c - && \
     unzip -d /usr/local elixir-precompiled.zip && \
     rm elixir-precompiled.zip && \
     # Install Hex and Rebar
