@@ -1,4 +1,4 @@
-FROM nebo15/alpine-erlang:21.0
+FROM nebo15/alpine-erlang:21.0.1
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Important! Update this no-op ENV variable when this Dockerfile
