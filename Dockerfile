@@ -1,4 +1,4 @@
-FROM nebo15/alpine-erlang:21.0.1
+FROM nebo15/alpine-erlang:21.0.5
 MAINTAINER Nebo#15 support@nebo15.com
 
 # Important! Update this no-op ENV variable when this Dockerfile
@@ -13,8 +13,8 @@ ENV LANG=en_US.UTF-8 \
     # Set this so that CTRL+G works properly
     TERM=xterm \
     HOME=/opt/app/ \
-    ELIXIR_VERSION=1.6.6 \
-    ELIXIR_DOWNLOAD_SHA256=d6a84726a042407110d3b13b1ce8d9524b4a50df68174e79d89a9e42e30b410b
+    ELIXIR_VERSION=1.7.2 \
+    ELIXIR_DOWNLOAD_SHA256=3258eca6b5caa5e98b67dd033f9eb1b0b7ecbdb7b0f07c111b704700962e64cc
 
 WORKDIR /tmp/elixir-build
 
