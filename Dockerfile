@@ -14,13 +14,14 @@ ENV LANG=en_US.UTF-8 \
     TERM=xterm \
     HOME=/opt/app/ \
     ELIXIR_VERSION=1.7.2 \
-    ELIXIR_DOWNLOAD_SHA256=3258eca6b5caa5e98b67dd033f9eb1b0b7ecbdb7b0f07c111b704700962e64cc
+    ELIXIR_DOWNLOAD_SHA256=7790fb5d63045e4b3c5482dde05abe90b417b00d532ca4dfd1c1295d0367e777
 
 WORKDIR /tmp/elixir-build
 
 # Install Elixir
 RUN set -xe; \
-    ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/releases/download/v${ELIXIR_VERSION}/Precompiled.zip" && \
+    OTP_MAJOR_VERSION=${OTP_VERSION%%\.*} && \
+    ELIXIR_DOWNLOAD_URL="https://repo.hex.pm/builds/elixir/v${ELIXIR_VERSION#*@}-otp-${OTP_MAJOR_VERSION#*@}.zip" && \
     # Install Elixir build deps
     apk add --no-cache --update --virtual .elixir-build \
       unzip \
@@ -28,7 +29,7 @@ RUN set -xe; \
       ca-certificates && \
     # Download and validate Elixir checksum
     curl -fSL -o elixir-precompiled.zip "${ELIXIR_DOWNLOAD_URL}" && \
-    echo "$ELIXIR_DOWNLOAD_SHA256  elixir-precompiled.zip" | sha256sum -c - && \
+    echo "${ELIXIR_DOWNLOAD_SHA256}  elixir-precompiled.zip" | sha256sum -c - && \
     unzip -d /usr/local elixir-precompiled.zip && \
     rm elixir-precompiled.zip && \
     # Install Hex and Rebar
