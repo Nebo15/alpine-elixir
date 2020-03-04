@@ -13,8 +13,8 @@ ENV LANG=en_US.UTF-8 \
     # Set this so that CTRL+G works properly
     TERM=xterm \
     HOME=/opt/app/ \
-    ELIXIR_VERSION=1.10.1 \
-    ELIXIR_DOWNLOAD_SHA256=d39d6c0833e773a24fb4345411ebd43ececa93349fb8989ba8a6152f8234b760
+    ELIXIR_VERSION=1.10.2 \
+    ELIXIR_DOWNLOAD_SHA256=f047716446594b4fdbddc3b32770a3644625c1e295cdc367a6e396bd78ffa741
 
 WORKDIR /tmp/elixir-build
 
